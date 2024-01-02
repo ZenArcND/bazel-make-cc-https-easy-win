@@ -43,7 +43,7 @@ def hedron_make_cc_https_easy():
         http_archive,
         name = "curl",
         build_file = "@hedron_make_cc_https_easy//:curl_win.BUILD",
-        url = "https://curl.se/windows/latest.cgi?p=win64-mingw.zip",
+        url = "https://curl.se/windows/dl-8.5.0_4/curl-8.5.0_4-win64-mingw.tar.xz",
         strip_prefix = "curl-8.5.0_4-win64-mingw",
     )
 
