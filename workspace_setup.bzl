@@ -38,15 +38,13 @@ def hedron_make_cc_https_easy():
     )
     # hedron_backport_std_filesystem is called in transitive_workspace_setup
 
-    # CPR wraps libcurl
-    # Note: libcurl updates are auto-PRd but not auto-merged, because the defines required to build it change frequently enough that you need to manually keep curl.BUILD in sync with https://github.com/curl/curl/commits/master/CMakeLists.txt. @cpsauer is responsible.
+    # prebuilt http curl binary files
     maybe(
         http_archive,
         name = "curl",
-        build_file = "@hedron_make_cc_https_easy//:curl.BUILD",
-        url = "https://github.com/curl/curl/archive/curl-8_5_0.tar.gz",
-        sha256 = "8117d24a8c29a0c3aa160703eb487694f3d4aa72ea2067b45beb439ea4d47668",
-        strip_prefix = "curl-curl-8_5_0",
+        build_file = "@hedron_make_cc_https_easy//:curl_win.BUILD",
+        url = "https://curl.se/windows/latest.cgi?p=win64-mingw.zip",
+        strip_prefix = "curl-8.5.0_4-win64-mingw",
     )
 
     # libcurl needs to bundle an SSL library on Android. We're using boringssl because it has easy Bazel support. Despite it's Google-only orientation, it's also used in, e.g., Envoy. But if LibreSSL had Bazel wrappings, we'd probably consider it.
